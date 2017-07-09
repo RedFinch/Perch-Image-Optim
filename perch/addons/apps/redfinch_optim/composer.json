@@ -1,0 +1,10 @@
+{
+    "config": {
+        "vendor-dir": "lib/vendor",
+        "preferred-install": "dist"
+    },
+    "require": {
+        "spatie/image-optimizer": "^1.0",
+        "psr/log": "^1.0"
+    }
+}
