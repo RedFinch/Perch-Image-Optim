@@ -13,13 +13,15 @@ function redfinch_optim_execute_task_queue($last_run_date)
     $successes = 0;
     $errors = 0;
 
-    foreach ($queue as $task) {
-        $result = $task->execute();
+    if(PerchUtil::count($queue)) {
+        foreach ($queue as $task) {
+            $result = $task->execute();
 
-        if ($result) {
-            $successes++;
-        } else {
-            $errors++;
+            if ($result) {
+                $successes++;
+            } else {
+                $errors++;
+            }
         }
     }
 
@@ -55,11 +57,22 @@ if($Settings->get('redfinch_optim_gc')->val() !== '-1') {
         $Settings = $API->get('Settings');
         $Tasks = new RedFinchOptim_Tasks($API);
 
-        $Tasks->prune($Settings->get('redfinch_optim_gc')->val());
+        $tasks = $Tasks->getForCleanup($Settings->get('redfinch_optim_gc')->val());
+
+        if (PerchUtil::count($tasks)) {
+            foreach ($tasks as $task) {
+                $task->delete();
+            }
+
+            return [
+                'result'  => 'OK',
+                'message' => sprintf('%s Completed tasks have been cleared.', PerchUtil::count($tasks))
+            ];
+        }
 
         return [
             'result'  => 'OK',
-            'message' => 'Completed tasks have been cleared.'
+            'message' => 'No tasks to clear.'
         ];
     }
 }

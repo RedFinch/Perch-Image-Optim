@@ -64,19 +64,21 @@ class RedFinchOptim_Tasks extends PerchAPI_Factory
     }
 
     /**
-     * Clear completed tasks that are older than the cutoff point
+     * Return completed tasks that are older than the cutoff point
      *
      * @param int $seconds
      *
      * @return mixed
      */
-    public function prune($seconds)
+    public function getForCleanup($seconds)
     {
         $cutoff = time() - $seconds;
 
-        $sql = 'DELETE FROM ' . $this->table . ' WHERE taskStatus = "OK" AND taskEnd <= ' . $this->db->pdb($cutoff);
+        $sql = 'SELECT taskID FROM ' . $this->table . ' WHERE taskStatus = "OK" AND taskEnd <= ' . $this->db->pdb($cutoff);
 
-        return $this->db->execute($sql);
+        $rows = $this->db->get_rows($sql);
+
+        return $this->return_instances($rows);
     }
 
     /**

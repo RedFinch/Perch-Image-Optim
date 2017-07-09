@@ -93,6 +93,9 @@ class RedFinchOptim_Task extends PerchAPI_Base
         return $this->taskStatus() === 'FAILED';
     }
 
+    /**
+     * Remove task logs before self
+     */
     public function delete()
     {
         (new RedFinchOptim_Logs())->clearForTask($this->id());
