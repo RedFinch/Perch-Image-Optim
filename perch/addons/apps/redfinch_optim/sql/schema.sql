@@ -5,7 +5,7 @@ CREATE TABLE `__PREFIX__redfinch_optim_logs` (
   `logMessage` text NOT NULL,
   `logCreated` datetime NOT NULL,
   PRIMARY KEY (`logID`)
-) ENGINE=InnoDB AUTO_INCREMENT=133 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 CREATE TABLE `__PREFIX__redfinch_optim_settings` (
   `settingKey` varchar(255) NOT NULL DEFAULT '',
@@ -22,4 +22,4 @@ CREATE TABLE `__PREFIX__redfinch_optim_tasks` (
   `taskStart` int(11) unsigned NOT NULL DEFAULT '0',
   `taskEnd` int(11) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`taskID`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
