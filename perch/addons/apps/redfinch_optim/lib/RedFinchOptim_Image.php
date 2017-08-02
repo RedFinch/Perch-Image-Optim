@@ -59,7 +59,7 @@ class RedFinchOptim_Image
         // GIFs
         if ((bool) $OptimSettings->get('gifsicle_enabled', 1)->value()) {
             $args = ['-b'];
-            $args[] = '--optimize ' . $OptimSettings->get('gifsicle_level', 3)->value();
+            $args[] = '-O' . $OptimSettings->get('gifsicle_level', 3)->value();
 
             $OptimiserChain->addOptimizer(new Gifsicle($args));
         }
